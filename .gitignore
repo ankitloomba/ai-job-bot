@@ -17,7 +17,7 @@ build/
 .env.production.local
 
 # Prisma
-apps/web/prisma/migrations/
+# prisma migrations are tracked in git — do NOT ignore them
 
 # OS
 .DS_Store
