@@ -1,0 +1,44 @@
+import Link from "next/link";
+import { Brain } from "lucide-react";
+import { LoginForm } from "@/components/auth/login-form";
+
+export const metadata = { title: "Create account — JobAI" };
+
+export default function SignupPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <Link href="/" className="flex items-center gap-2 justify-center mb-8">
+          <div className="w-9 h-9 rounded-xl bg-brand flex items-center justify-center">
+            <Brain className="w-5 h-5 text-white" />
+          </div>
+          <span className="font-bold text-2xl text-gray-900 dark:text-white">JobAI</span>
+        </Link>
+
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            Create your account
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
+            Free forever · Takes 2 minutes · No credit card
+          </p>
+          {/* Reuse same form — NextAuth handles new vs returning */}
+          <LoginForm />
+        </div>
+
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
+          Already have an account?{" "}
+          <Link href="/login" className="text-brand font-medium hover:underline">
+            Sign in
+          </Link>
+        </p>
+
+        <p className="text-center text-xs text-gray-400 mt-4">
+          By signing up you agree to our{" "}
+          <Link href="/terms" className="underline">Terms</Link> and{" "}
+          <Link href="/privacy" className="underline">Privacy Policy</Link>
+        </p>
+      </div>
+    </div>
+  );
+}
