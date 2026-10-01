@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import LinkedIn from "next-auth/providers/linkedin";
-import Resend from "next-auth/providers/resend";
+import Nodemailer from "next-auth/providers/nodemailer";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -13,8 +13,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.LINKEDIN_CLIENT_ID!,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
     }),
-    Resend({
-      apiKey: process.env.RESEND_API_KEY!,
+    Nodemailer({
+      server: {
+        host: "smtp-relay.brevo.com",
+        port: 587,
+        auth: {
+          user: process.env.BREVO_SMTP_LOGIN!,   // your Brevo account email
+          pass: process.env.BREVO_SMTP_KEY!,     // SMTP key from Brevo dashboard
+        },
+      },
       from: "JobAI <noreply@yourdomain.com>",
     }),
   ],
