@@ -2,8 +2,12 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import LinkedIn from "next-auth/providers/linkedin";
 import Nodemailer from "next-auth/providers/nodemailer";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET,
+  adapter: PrismaAdapter(prisma),
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -18,8 +22,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         host: "smtp-relay.brevo.com",
         port: 587,
         auth: {
-          user: process.env.BREVO_SMTP_LOGIN!,   // your Brevo account email
-          pass: process.env.BREVO_SMTP_KEY!,     // SMTP key from Brevo dashboard
+          user: process.env.BREVO_SMTP_LOGIN!,
+          pass: process.env.BREVO_SMTP_KEY!,
         },
       },
       from: "JobAI <noreply@yourdomain.com>",
@@ -28,18 +32,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
     verifyRequest: "/verify",
-    error: "/verify?error=true",
+    error: "/login?error=true",
   },
   callbacks: {
-    async session({ session, token }) {
-      if (token.sub) session.user.id = token.sub;
+    async session({ session, token, user }) {
+      if (token?.sub) session.user.id = token.sub;
+      if (user?.id) session.user.id = user.id;
       return session;
     },
     async redirect({ url, baseUrl }) {
-      // After login, check if onboarding is complete
       if (url.startsWith(baseUrl)) return url;
       return `${baseUrl}/dashboard`;
     },
   },
-  session: { strategy: "jwt" },
+  session: { strategy: "database" },
 });
