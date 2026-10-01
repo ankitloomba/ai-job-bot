@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Brain, Search, FileText, Zap, Star, Users, Building2 } from "lucide-react";
 import { AdBanner } from "@/components/ui/ad-banner";
 
@@ -9,9 +10,7 @@ export default function LandingPage() {
       <nav className="sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
-            </div>
+            <Image src="/logo.png" width={32} height={32} alt="JobAI" className="rounded-lg" />
             <span className="font-bold text-xl text-gray-900 dark:text-white">JobAI</span>
           </div>
           <div className="flex items-center gap-3">
@@ -177,9 +176,7 @@ export default function LandingPage() {
       <footer className="border-t border-gray-100 dark:border-gray-800 py-8">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-brand flex items-center justify-center">
-              <Brain className="w-4 h-4 text-white" />
-            </div>
+            <Image src="/logo.png" width={24} height={24} alt="JobAI" className="rounded" />
             <span className="font-semibold text-gray-700 dark:text-gray-300">JobAI</span>
           </div>
           <div className="flex gap-6 text-sm text-gray-500">

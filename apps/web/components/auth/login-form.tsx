@@ -28,7 +28,7 @@ export function LoginForm() {
     setLoading("email");
     setError("");
     try {
-      const res = await signIn("resend", {
+      const res = await signIn("nodemailer", {
         email,
         redirect: false,
         callbackUrl: "/dashboard",

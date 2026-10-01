@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Brain } from "lucide-react";
+import Image from "next/image";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata = { title: "Create account — JobAI" };
@@ -9,9 +9,7 @@ export default function SignupPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center px-4">
       <div className="w-full max-w-md">
         <Link href="/" className="flex items-center gap-2 justify-center mb-8">
-          <div className="w-9 h-9 rounded-xl bg-brand flex items-center justify-center">
-            <Brain className="w-5 h-5 text-white" />
-          </div>
+          <Image src="/logo.png" width={36} height={36} alt="JobAI" className="rounded-xl" />
           <span className="font-bold text-2xl text-gray-900 dark:text-white">JobAI</span>
         </Link>
 
