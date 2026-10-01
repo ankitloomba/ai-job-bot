@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import LinkedIn from "next-auth/providers/linkedin";
-import Nodemailer from "next-auth/providers/nodemailer";
+import Email from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
@@ -17,16 +17,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.LINKEDIN_CLIENT_ID!,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
     }),
-    Nodemailer({
-      server: {
-        host: "smtp-relay.brevo.com",
-        port: 587,
-        auth: {
-          user: process.env.BREVO_SMTP_LOGIN!,
-          pass: process.env.BREVO_SMTP_KEY!,
-        },
+    Email({
+      from: "JobAI <noreply@jobai.in>",
+      sendVerificationRequest: async ({ identifier: email, url }) => {
+        const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+          method: "POST",
+          headers: {
+            "api-key": process.env.BREVO_API_KEY!,
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            sender: { name: "JobAI", email: "noreply@jobai.in" },
+            to: [{ email }],
+            subject: "Sign in to JobAI",
+            htmlContent: `
+              <div style="font-family:sans-serif;max-width:480px;margin:0 auto">
+                <h2 style="color:#6C47FF">Sign in to JobAI</h2>
+                <p>Click the button below to sign in. This link expires in 10 minutes.</p>
+                <a href="${url}" style="display:inline-block;background:#6C47FF;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin:16px 0">
+                  Sign in to JobAI
+                </a>
+                <p style="color:#888;font-size:13px">If you didn't request this, you can ignore this email.</p>
+              </div>
+            `,
+          }),
+        });
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Brevo API error: ${res.status} ${text}`);
+        }
       },
-      from: "JobAI <noreply@yourdomain.com>",
     }),
   ],
   pages: {
@@ -35,8 +55,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: "/login?error=true",
   },
   callbacks: {
-    async session({ session, token, user }) {
-      if (token?.sub) session.user.id = token.sub;
+    async session({ session, user }) {
       if (user?.id) session.user.id = user.id;
       return session;
     },
