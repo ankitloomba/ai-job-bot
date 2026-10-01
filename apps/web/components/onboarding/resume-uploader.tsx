@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, FileRejection } from "react-dropzone";
 import { useRouter } from "next/navigation";
 import { Upload, FileText, CheckCircle2, Loader2, X } from "lucide-react";
 
@@ -11,7 +11,7 @@ export function ResumeUploader() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
 
-  const onDrop = useCallback((accepted: File[], rejected: { errors: { message: string }[] }[]) => {
+  const onDrop = useCallback((accepted: File[], rejected: FileRejection[]) => {
     setError("");
     if (rejected.length > 0) {
       setError("Only PDF or DOCX files under 5MB are accepted.");
