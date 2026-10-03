@@ -19,10 +19,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
     Email({
       server: "smtp://localhost:25",  // dummy — real sending uses Brevo HTTP API below
-      from: "JobAI <noreply@jobai.in>",
+      from: "JobHuntPro <ankitloomba156@gmail.com>",
       sendVerificationRequest: async ({ identifier: email, url }) => {
-        const key = process.env.BREVO_API_KEY ?? "";
-        console.log("[brevo-debug] key length:", key.length, "| first 8:", key.slice(0, 8), "| last 4:", key.slice(-4));
         const res = await fetch("https://api.brevo.com/v3/smtp/email", {
           method: "POST",
           headers: {
@@ -30,7 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             "content-type": "application/json",
           },
           body: JSON.stringify({
-            sender: { name: "JobAI", email: "noreply@jobai.in" },
+            sender: { name: "JobHuntPro", email: "ankitloomba156@gmail.com" },
             to: [{ email }],
             subject: "Sign in to JobAI",
             htmlContent: `
