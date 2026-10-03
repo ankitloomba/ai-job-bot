@@ -18,6 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
     }),
     Email({
+      server: "smtp://localhost:25",  // dummy — real sending uses Brevo HTTP API below
       from: "JobAI <noreply@jobai.in>",
       sendVerificationRequest: async ({ identifier: email, url }) => {
         const res = await fetch("https://api.brevo.com/v3/smtp/email", {
