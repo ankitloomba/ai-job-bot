@@ -41,8 +41,16 @@ const config: Config = {
           foreground: "hsl(var(--accent-foreground))",
         },
         brand: {
-          DEFAULT: "#4F6EF7",
-          hover: "#3B5AE8",
+          DEFAULT: "#2563EB",
+          hover: "#1D4ED8",
+          light: "#BAE6FD",
+        },
+        jhp: {
+          cream: "#FBFAF7",
+          black: "#1C1917",
+          blue: "#2563EB",
+          sky: "#BAE6FD",
+          gray: "#78716C",
         },
       },
       borderRadius: {

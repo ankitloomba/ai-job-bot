@@ -4,25 +4,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* JobHuntPro palette */
+    --background: 40 33% 98%;        /* #FBFAF7 warm cream */
+    --foreground: 20 6% 10%;         /* #1C1917 near-black */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 6% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 231 90% 65%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 20 6% 10%;
+    --primary: 221 83% 53%;          /* #2563EB brand blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 33% 96%;
+    --secondary-foreground: 20 6% 10%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 28 6% 44%;   /* #78716C warm gray */
+    --accent: 199 89% 84%;           /* #BAE6FD sky blue */
+    --accent-foreground: 20 6% 10%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 231 90% 65%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 15% 88%;
+    --input: 40 15% 90%;
+    --ring: 221 83% 53%;
     --radius: 0.75rem;
   }
 

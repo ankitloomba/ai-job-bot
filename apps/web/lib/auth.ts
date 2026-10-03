@@ -30,13 +30,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           body: JSON.stringify({
             sender: { name: "JobHuntPro", email: "ankitloomba156@gmail.com" },
             to: [{ email }],
-            subject: "Sign in to JobAI",
+            subject: "Sign in to JobHuntPro",
             htmlContent: `
               <div style="font-family:sans-serif;max-width:480px;margin:0 auto">
-                <h2 style="color:#6C47FF">Sign in to JobAI</h2>
+                <h2 style="color:#2563EB">Sign in to JobHuntPro</h2>
                 <p>Click the button below to sign in. This link expires in 10 minutes.</p>
-                <a href="${url}" style="display:inline-block;background:#6C47FF;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin:16px 0">
-                  Sign in to JobAI
+                <a href="${url}" style="display:inline-block;background:#2563EB;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin:16px 0">
+                  Sign in to JobHuntPro
                 </a>
                 <p style="color:#888;font-size:13px">If you didn't request this, you can ignore this email.</p>
               </div>
