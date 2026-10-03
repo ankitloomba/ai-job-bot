@@ -21,6 +21,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       server: "smtp://localhost:25",  // dummy — real sending uses Brevo HTTP API below
       from: "JobAI <noreply@jobai.in>",
       sendVerificationRequest: async ({ identifier: email, url }) => {
+        const key = process.env.BREVO_API_KEY ?? "";
+        console.log("[brevo-debug] key length:", key.length, "| first 8:", key.slice(0, 8), "| last 4:", key.slice(-4));
         const res = await fetch("https://api.brevo.com/v3/smtp/email", {
           method: "POST",
           headers: {
